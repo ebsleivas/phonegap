@@ -58,7 +58,7 @@ function checkOnline(server) {
   xhr.onreadystatechange = function () {
       if(xhr.status === 200) {
         //document.getElementById('servidor').innerHTML = server;
-        localStorage.setItem("server", server);
+        localStorage.setItem("server", "http://192.168.1.51");
         login(server);
       }else{
         localStorage.setItem("server", "http://ebsleivas.sytes.net");
@@ -93,7 +93,7 @@ function nr_virg(e) {
 };
 
 var login = function(server){
-
+    document.getElementById('loading').setAttribute('style', 'display:none;');
     document.getElementById('login').setAttribute('style', 'display:block;');
 };
 
