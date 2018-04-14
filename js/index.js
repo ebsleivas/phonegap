@@ -102,11 +102,11 @@ var login = function(server){
 };
 
 var logar = function(){
-  msg(localStorage.getItem("server"));
+  server = localStorage.getItem("server");
   var nome = document.getElementById('hnome').value;
   var senha = document.getElementById('hsenha').value;
   xhr = new XMLHttpRequest();
-  xhr.open('POST', localStorage.getItem("server") + "/cx/funcoes.php");
+  xhr.open('POST', server + "/cx/funcoes.php");
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function() {
    if (xhr.status === 200) {
