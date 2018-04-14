@@ -47,20 +47,17 @@ var app = {
 
         console.log('Received Event: ' + id);
         */
-        //checkOnline('http://192.168.1.5');
-        inicializar();
+        checkOnline('http://192.168.1.5');
+        //login();
     }
 };
 
 function checkOnline(server) {
   var xhr = new XMLHttpRequest();
-  //method = "POST",
-  //url = "http://192.168.1.5/cx/funcoes.php";
   xhr.open('POST', server + "/cx/funcoes.php", true);
-  //xhr.open(method, url, true);
   xhr.onreadystatechange = function () {
       if(xhr.status === 200) {
-        document.getElementById('servidor').innerHTML = server;
+        //document.getElementById('servidor').innerHTML = server;
         login(server);
       }else{
         login(server);
@@ -103,10 +100,8 @@ var login = function(server){
 var logar = function(){
   var nome = document.getElementById('hnome').value;
   var senha = document.getElementById('hsenha').value;
-  var url = localStorage.getItem("server") + "/cx/funcoes.php";
-  //msg(url);
   xhr = new XMLHttpRequest();
-  xhr.open('POST', "http://192.168.1.5/cx/funcoes.php", true);
+  xhr.open('POST', localStorage.getItem("server") + "/cx/funcoes.php", true);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function() {
    if (xhr.status === 200) {
@@ -115,9 +110,9 @@ var logar = function(){
        localStorage.setItem("user", json[0].usuario);
        localStorage.setItem("logado", '1');
        inicializar();
-      }else{
-        msg('Senha ou usuário inválido!');
-      }
+    }else{
+      msg('Senha ou usuário inválido!');
+    }
     }else if (xhr.status !== 200) {
       msg('Request failed.  Returned status of ' + xhr.status);
     }
@@ -138,8 +133,7 @@ var inicializar = function(){
 	document.getElementById('anomes').innerHTML = monName[now.getMonth()] + " de " + now.getFullYear();
 
 	xhr = new XMLHttpRequest();
-	//xhr.open('POST', localStorage.getItem("server") + "/cx/funcoes.php");
-  xhr.open('POST', "http://192.168.1.5/cx/funcoes.php", true);
+	xhr.open('POST', localStorage.getItem("server") + "/cx/funcoes.php");
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	xhr.onload = function() {
 	  if (xhr.status === 200) {
