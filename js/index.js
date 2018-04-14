@@ -58,8 +58,10 @@ function checkOnline(server) {
   xhr.onreadystatechange = function () {
       if(xhr.status === 200) {
         //document.getElementById('servidor').innerHTML = server;
+        localStorage.setItem("server", server);
         login(server);
       }else{
+        localStorage.setItem("server", "http://ebsleivas.sytes.net");
         login("http://ebsleivas.sytes.net");
       }
     };
@@ -91,7 +93,7 @@ function nr_virg(e) {
 };
 
 var login = function(server){
-    localStorage.setItem("server", server);
+
     document.getElementById('login').setAttribute('style', 'display:block;');
 };
 
