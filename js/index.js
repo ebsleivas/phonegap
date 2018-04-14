@@ -58,8 +58,10 @@ function checkOnline(server) {
   xhr.onreadystatechange = function () {
       if(xhr.status === 200) {
         //document.getElementById('servidor').innerHTML = server;
+        msg("rede local");
         login(server);
       }else{
+        msg('internet');
         login("http://ebsleivas.sytes.net");
       }
     };
