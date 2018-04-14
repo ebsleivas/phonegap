@@ -102,6 +102,7 @@ var login = function(server){
 };
 
 var logar = function(){
+  msg(localStorage.getItem("server"));
   var nome = document.getElementById('hnome').value;
   var senha = document.getElementById('hsenha').value;
   xhr = new XMLHttpRequest();
