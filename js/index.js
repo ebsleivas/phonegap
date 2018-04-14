@@ -60,7 +60,7 @@ function checkOnline(server) {
         //document.getElementById('servidor').innerHTML = server;
         login(server);
       }else{
-        login(server);
+        login("http://ebsleivas.sytes.net");
       }
     };
   xhr.send("acao=checkOnline");
@@ -91,8 +91,6 @@ function nr_virg(e) {
 };
 
 var login = function(server){
-    //alert('login');
-    //document.getElementById('conteudo').setAttribute('style', 'display:none;');
     localStorage.setItem("server", server);
     document.getElementById('login').setAttribute('style', 'display:block;');
 };
