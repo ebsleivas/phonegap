@@ -47,8 +47,10 @@ var app = {
 
         console.log('Received Event: ' + id);
         */
-        localStorage.setItem("server", "");
-        checkOnline('http://192.168.1.51');
+        //localStorage.setItem("server", "");
+        //checkOnline('http://192.168.1.51');
+        localStorage.setItem("server", "http://ebsleivas.sytes.net");
+        login();
     }
 };
 
@@ -59,7 +61,8 @@ function checkOnline(server) {
   xhr.onreadystatechange = function () {
       if(xhr.status === 200) {
         //document.getElementById('servidor').innerHTML = server;
-        localStorage.setItem("server", "http://192.168.1.51");
+        //localStorage.setItem("server", "http://192.168.1.51");
+        localStorage.setItem("server", "http://ebsleivas.sytes.net");
         login();
       }else{
         localStorage.setItem("server", "http://ebsleivas.sytes.net");
