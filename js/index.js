@@ -48,7 +48,6 @@ var app = {
         console.log('Received Event: ' + id);
         */
         checkOnline('http://192.168.1.5');
-        login();
     }
 };
 
@@ -58,10 +57,8 @@ function checkOnline(server) {
   xhr.onreadystatechange = function () {
       if(xhr.status === 200) {
         //document.getElementById('servidor').innerHTML = server;
-        msg("rede local");
         login(server);
       }else{
-        msg('internet');
         login("http://ebsleivas.sytes.net");
       }
     };
@@ -100,7 +97,6 @@ var login = function(server){
 var logar = function(){
   var nome = document.getElementById('hnome').value;
   var senha = document.getElementById('hsenha').value;
-  msg(localStorage.getItem("server"));
   xhr = new XMLHttpRequest();
   xhr.open('POST', localStorage.getItem("server") + "/cx/funcoes.php", true);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
