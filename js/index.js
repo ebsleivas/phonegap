@@ -63,7 +63,6 @@ function checkOnline(server) {
         document.getElementById('servidor').innerHTML = server;
         login(server);
       }else{
-        document.getElementById('servidor').innerHTML = server;
         login(server);
       }
     };
@@ -97,18 +96,17 @@ function nr_virg(e) {
 var login = function(server){
     //alert('login');
     //document.getElementById('conteudo').setAttribute('style', 'display:none;');
-    serv = server + "/cx/funcoes.php";
-    localStorage.setItem("server", serv);
+    localStorage.setItem("server", server);
     document.getElementById('login').setAttribute('style', 'display:block;');
 };
 
 var logar = function(){
-  server = localStorage.getItem("server");
-  msg(server);
   var nome = document.getElementById('hnome').value;
   var senha = document.getElementById('hsenha').value;
+  var url = localStorage.getItem("server") + "/cx/funcoes.php";
+  msg(url);
   xhr = new XMLHttpRequest();
-  xhr.open('POST', server, true);
+  xhr.open('POST', url, true);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function() {
    if (xhr.status === 200) {
