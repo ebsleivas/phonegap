@@ -126,6 +126,7 @@ var inicializar = function(){
   document.getElementById('login').setAttribute('style', 'display:none;');
   document.getElementById('footer').setAttribute('style', 'display:none;');
   document.getElementById('categorias').setAttribute('style', 'display:none;');
+  document.getElementById('adicionar').setAttribute('style', 'display:none;');
   monName = new Array ("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho","Agosto", "Setembro","Outubro", "Novembro", "Dezembro");
 	now = new Date;
 	mes = now.getMonth();
