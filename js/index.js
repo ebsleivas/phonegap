@@ -55,14 +55,15 @@ var app = {
 function checkOnline(server) {
   var xhr = new XMLHttpRequest();
   xhr.open('POST', server + "/cx/funcoes.php", true);
+  xhr.timeout = 3000;
   xhr.onreadystatechange = function () {
       if(xhr.status === 200) {
         //document.getElementById('servidor').innerHTML = server;
         localStorage.setItem("server", "http://192.168.1.51");
-        login(server);
+        login();
       }else{
         localStorage.setItem("server", "http://ebsleivas.sytes.net");
-        login("http://ebsleivas.sytes.net");
+        login();
       }
     };
   xhr.send("acao=checkOnline");
@@ -92,7 +93,7 @@ function nr_virg(e) {
 		return false;
 };
 
-var login = function(server){
+var login = function(){
     document.getElementById('loading').setAttribute('style', 'display:none;');
     document.getElementById('login').setAttribute('style', 'display:block;');
 };
