@@ -98,7 +98,7 @@ var login = function(server){
     //alert('login');
     //document.getElementById('conteudo').setAttribute('style', 'display:none;');
     serv = server + "/cx/funcoes.php";
-    localStorage.setItem("server", server);
+    localStorage.setItem("server", serv);
     document.getElementById('login').setAttribute('style', 'display:block;');
 };
 
