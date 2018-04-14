@@ -47,7 +47,8 @@ var app = {
 
         console.log('Received Event: ' + id);
         */
-        checkOnline('http://192.168.1.5');
+        localStorage.setItem("server", "");
+        checkOnline('http://192.168.1.51');
     }
 };
 
@@ -95,6 +96,7 @@ var login = function(server){
 };
 
 var logar = function(){
+  msg(localStorage.getItem("server"));
   var nome = document.getElementById('hnome').value;
   var senha = document.getElementById('hsenha').value;
   xhr = new XMLHttpRequest();
