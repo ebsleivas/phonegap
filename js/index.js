@@ -138,7 +138,8 @@ var inicializar = function(){
 	document.getElementById('anomes').innerHTML = monName[now.getMonth()] + " de " + now.getFullYear();
 
 	xhr = new XMLHttpRequest();
-	xhr.open('POST', localStorage.getItem("server") + "/cx/funcoes.php");
+	//xhr.open('POST', localStorage.getItem("server") + "/cx/funcoes.php");
+  xhr.open('POST', "http://192.168.1.5/cx/funcoes.php", true);
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	xhr.onload = function() {
 	  if (xhr.status === 200) {
