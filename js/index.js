@@ -55,7 +55,7 @@ var app = {
 function checkOnline(server) {
   var xhr = new XMLHttpRequest();
   xhr.open('POST', server + "/cx/funcoes.php", true);
-  xhr.timeout = 3000;
+  xhr.timeout = 2000;
   xhr.onreadystatechange = function () {
       if(xhr.status === 200) {
         //document.getElementById('servidor').innerHTML = server;
@@ -99,7 +99,7 @@ var login = function(){
 };
 
 var logar = function(){
-  msg(localStorage.getItem("server"));
+  //msg(localStorage.getItem("server"));
   var nome = document.getElementById('hnome').value;
   var senha = document.getElementById('hsenha').value;
   xhr = new XMLHttpRequest();
