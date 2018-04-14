@@ -98,6 +98,7 @@ var login = function(server){
 var logar = function(){
   var nome = document.getElementById('hnome').value;
   var senha = document.getElementById('hsenha').value;
+  msg(localStorage.getItem("server"));
   xhr = new XMLHttpRequest();
   xhr.open('POST', localStorage.getItem("server") + "/cx/funcoes.php", true);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
