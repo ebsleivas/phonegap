@@ -228,7 +228,7 @@ var salvar = function(){
   var valor = document.getElementById('valor').value;
   var categoria = localStorage.getItem("id_cat");
   if(valor == ''){
-    alert("Informe o valor!");
+    msg("Informe o valor!");
     return;
   }
   xhr = new XMLHttpRequest();
