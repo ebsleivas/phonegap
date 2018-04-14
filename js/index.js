@@ -48,7 +48,7 @@ var app = {
         console.log('Received Event: ' + id);
         */
         checkOnline('http://192.168.1.5');
-        //login();
+        login();
     }
 };
 
