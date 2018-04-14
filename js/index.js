@@ -47,8 +47,8 @@ var app = {
 
         console.log('Received Event: ' + id);
         */
-        checkOnline('http://192.168.1.5');
-        //login();
+        //checkOnline('http://192.168.1.5');
+        login();
     }
 };
 
@@ -115,9 +115,9 @@ var logar = function(){
        localStorage.setItem("user", json[0].usuario);
        localStorage.setItem("logado", '1');
        inicializar();
-    }else{
-      msg('Senha ou usuário inválido!');
-    }
+      }else{
+        msg('Senha ou usuário inválido!');
+      }
     }else if (xhr.status !== 200) {
       msg('Request failed.  Returned status of ' + xhr.status);
     }
