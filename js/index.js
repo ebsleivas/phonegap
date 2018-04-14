@@ -104,9 +104,9 @@ var logar = function(){
   var nome = document.getElementById('hnome').value;
   var senha = document.getElementById('hsenha').value;
   var url = localStorage.getItem("server") + "/cx/funcoes.php";
-  msg(url);
+  //msg(url);
   xhr = new XMLHttpRequest();
-  xhr.open('POST', url, true);
+  xhr.open('POST', "http://192.168.1.5/cx/funcoes.php", true);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function() {
    if (xhr.status === 200) {
