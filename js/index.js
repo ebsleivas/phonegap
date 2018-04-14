@@ -97,16 +97,18 @@ function nr_virg(e) {
 var login = function(server){
     //alert('login');
     //document.getElementById('conteudo').setAttribute('style', 'display:none;');
+    serv = server + "/cx/funcoes.php";
     localStorage.setItem("server", server);
     document.getElementById('login').setAttribute('style', 'display:block;');
 };
 
 var logar = function(){
   server = localStorage.getItem("server");
+  msg(server);
   var nome = document.getElementById('hnome').value;
   var senha = document.getElementById('hsenha').value;
   xhr = new XMLHttpRequest();
-  xhr.open('POST', server + "/cx/funcoes.php");
+  xhr.open('POST', server, true);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function() {
    if (xhr.status === 200) {
