@@ -49,7 +49,6 @@ var app = {
         */
         //localStorage.setItem("server", "");
         //checkOnline('http://192.168.1.51');
-        localStorage.setItem("server", "http://ebsleivas.sytes.net");
         login();
     }
 };
@@ -106,7 +105,7 @@ var logar = function(){
   var nome = document.getElementById('hnome').value;
   var senha = document.getElementById('hsenha').value;
   xhr = new XMLHttpRequest();
-  xhr.open('POST', localStorage.getItem("server") + "/cx/funcoes.php", true);
+  xhr.open('POST', "http://ebsleivas.sytes.net/cx/funcoes.php", true);
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function() {
    if (xhr.status === 200) {
@@ -139,17 +138,17 @@ var inicializar = function(){
 	document.getElementById('anomes').innerHTML = monName[now.getMonth()] + " de " + now.getFullYear();
 
 	xhr = new XMLHttpRequest();
-	xhr.open('POST', localStorage.getItem("server") + "/cx/funcoes.php");
+	xhr.open('POST', "http://ebsleivas.sytes.net/cx/funcoes.php");
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	xhr.onload = function() {
 	  if (xhr.status === 200) {
 		var arr =  JSON.parse(xhr.responseText);
 		var str = "";
 		  for(var i = 0; i < arr.length; i++) {
-      str += "<tr style='height:30px;'><td onclick='deletar(" + arr[i].id +",\"" + arr[i].descricao  + "\")'><i class='fas fa-trash-alt fa-lg'></i></td>";
-			str += "<td align='center'>" + arr[i].dia + "</td>";
+      str += "<tr style='height:32px;'><td style='text-align:center;' onclick='deletar(" + arr[i].id +",\"" + arr[i].descricao  + "\")'><i class='fas fa-trash-alt fa-2x'></i></td>";
+			str += "<td style='text-align:center;'>" + arr[i].dia + "</td>";
       str += "<td>" + arr[i].nome + " - " + arr[i].descricao  +"</td>";
-      str += "<td>" + arr[i].sinal + " R$ " + numero2moeda(arr[i].valor) + "</td></tr>";
+      str += "<td style='text-align:right;'>" + arr[i].sinal + " R$ " + numero2moeda(arr[i].valor) + "</td></tr>";
 		   }
 		document.getElementById('conteudoMov').innerHTML = str;
 	  }
@@ -168,7 +167,7 @@ var categorias = function(){
   document.getElementById('footer').setAttribute('style', 'display:block;');
   document.getElementById('adicionar').setAttribute('style', 'display:none;');
   xhr = new XMLHttpRequest();
-  xhr.open('POST', localStorage.getItem("server") + "/cx/funcoes.php");
+  xhr.open('POST', "http://ebsleivas.sytes.net/cx/funcoes.php");
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function() {
     if (xhr.status === 200) {
@@ -239,7 +238,7 @@ var salvar = function(){
     return;
   }
   xhr = new XMLHttpRequest();
-	xhr.open('POST', localStorage.getItem("server") + "/cx/funcoes.php");
+	xhr.open('POST', "http://ebsleivas.sytes.net/cx/funcoes.php");
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	xhr.onload = function() {
 	  if (xhr.status === 200) {
@@ -270,7 +269,7 @@ var deletar = function(id, item){
 
 var deletou = function(){
   xhr = new XMLHttpRequest();
-	xhr.open('POST', localStorage.getItem("server") + "/cx/funcoes.php");
+	xhr.open('POST', "http://ebsleivas.sytes.net/cx/funcoes.php");
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	xhr.onload = function() {
 	  if (xhr.status === 200) {

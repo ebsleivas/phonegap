@@ -37,8 +37,10 @@
     * Create your own at http://cspisawesome.com
     -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <link href="https://fonts.googleapis.com/css?family=Galada" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Alegreya' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <link rel="stylesheet" type="text/css" href="css/w3mobile.css" />
+    <link rel="stylesheet" type="text/css" href="css/w3.css" />
     <link rel="stylesheet" type="text/css" href="css/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css">
     <link rel="stylesheet" type="text/css" href="css/w3-colors-camo.css" />
     <title>Caixa</title>
@@ -53,35 +55,38 @@
         </div>
     </div>
     <div id="loading" class="w3-display-middle"><i class="fas fa-spinner fa-pulse fa-3x"></i></div>
-    <div id="login" class="w3-container w3-display-middle w3-center" style="width:900px;display:none;">
+    <!--<div id="login" class="w3-display-middle" style="border:1px solid red;">-->
+    <div id="login" class="w3-container w3-center">
         <div class="w3-padding">
-          <i class="fas fa-lock fa-3x" style="color:SlateBlue"></i>
-          <p>Livro Caixa</p>
+          <br><br><br>
+          <i class="fas fa-lock fa-3x" style="color:Orange"></i>
+          <p style="font-family: 'Galada';font-size: 22px;">Livro Caixa</p>
         </div>
 
-        <div class="container w3-padding-8">
-          <p><b>Nome</b>
-          <input class="w3-center" type="text" autocomplete="off" placeholder="Entre com o Nome" id="hnome" name="hnome" style="width:150px;" autofocus required> </p>
-          <p><label><b>Senha</b></label>
-          <input class="w3-center" type="password" placeholder="Entre com a senha..." id="hsenha" name="hsenha" style="width:150px;" required></p>
-        </div>
+
+          <div class="text-left">
+          Nome <input class="w3-center" type="text" autocomplete="off" id="hnome" name="hnome" style="width:100px;" autofocus required>
+          </div>
+          <p><label>Senha</label>
+          <input class="w3-center" type="password" id="hsenha" name="hsenha" style="width:100px;" required></p>
+
 
         <div class="container w3-center w3-padding-2">
-          <button class="w3-btn w3-round w3-text-shadow w3-tiny w3-camo-black" onclick="logar()">Acessar</button>
+          <button class="w3-button w3-blue" onclick="logar()">Acessar</button>
         </div>
     </div>
 
     <div id="conteudo" style="display:none;">
-      <div class="w3-camo-sand sticky">
-    		<div id="anomes" class="w3-center"></div>
+      <div class="w3-indigo sticky w3-padding">
+    		<div id="anomes" class="w3-center" style="font-family: 'Galada';font-size: 18px;"></div>
     	</div>
       <div id="inicializar">
         <!--<div id="menu" class="topo"> -->
-      		 <button class="w3-btn w3-small w3-round w3-text-shadow w3-camo-black w3-block topo" onclick="categorias()"><i class="fas fa-plus fa-lg"></i>&nbsp; Adicionar movimento</button>
+      		 <button class="w3-button w3-blue w3-block topo" onclick="categorias()"><i class="fas fa-plus fa-lg"></i>&nbsp; Adicionar movimento</button>
       	<!--</div>--><br><br>
         <table id="movimento"  cellpadding="1" cellspacing="0" class=""  style='width:100%;'>
-    		<thead style='font-size: 9px;'>
-    			<tr class="w3-camo-forest" style="border:0;height:30px;">
+    		<thead style='font-size: 10px;'>
+    			<tr class="w3-camo-forest" style="border:0;height:32px;">
             <th style="white-space: nowrap;" width="5">&nbsp;</th>
     				<th style="white-space: nowrap;" width="10">dia</th>
     				<th class="text-center">descricao</th>
@@ -110,11 +115,11 @@
         <p>
           valor: <input type="text" id="valor" onkeypress='return nr_virg(event)' style="width:60px;">
         </p>
-        <button class="w3-btn w3-small w3-round w3-text-shadow w3-camo-black" onclick="salvar()"><i class="fas fa-save fa-lg"></i>&nbsp; Salvar</button>
+        <button class="w3-button w3-blue" onclick="salvar()"><i class="fas fa-save fa-lg"></i>&nbsp; Salvar</button>
       </div>
       </div>
       <div id="footer" class="footer w3-camo-sand w3-center" style="display:none;">
-        <button id="btn_voltar" class="w3-btn w3-small w3-round w3-text-shadow w3-camo-black" onclick="window.history.back()"><i class="fas fa-angle-double-left fa-lg"></i>&nbsp; Voltar</button>
+        <button id="btn_voltar" class="w3-button w3-blue" onclick="window.history.back()"><i class="fas fa-angle-double-left fa-lg"></i>&nbsp; Voltar</button>
       </div>
     </div>
 
