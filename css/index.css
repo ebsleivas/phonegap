@@ -24,7 +24,7 @@
 div.sticky {position: -webkit-sticky; position: sticky; top: 0; padding: 1px;/*background-color: #FFFFFF;*/}
 .topo {
     position: fixed; /* Set the navbar to fixed position */
-    top: 24px; /* Position the navbar at the top of the page */
+    top: 28px; /* Position the navbar at the top of the page */
 }
 tr:nth-child(even) {background-color: #f2f2f2}
 tbody tr:hover { background-color: #ffff99; }
