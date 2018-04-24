@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+n<!DOCTYPE html>
 <!--
     Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
 
@@ -46,10 +46,8 @@
 </head>
 
 <body>
-    <button onclick="login()" style="display:none;">iniciar</button>
-    <div id="loading" class="w3-display-middle" style="display:none;"><i class="fas fa-spinner fa-pulse fa-3x"></i></div>
-    <!--<div id="login" class="w3-display-middle" style="border:1px solid red;">-->
-    <div id="login" class="w3-container w3-center" style="display:none;">
+    <div id="loading" class="w3-display-middle" style="display:block;"><i class="fas fa-spinner fa-pulse fa-3x"></i></div>
+    <div id="login" class="w3-container w3-center w3-animate-zoom" style="display:none;">
         <div class="w3-padding">
           <br><br>
           <i class="fas fa-lock fa-2x" style="color:Orange"></i>
@@ -68,16 +66,18 @@
     </div>
 
     <div id="conteudo" style="display:none;">
-      <div class="w3-indigo sticky">
-        <div class="w3-row" style="font-size:11px">
-          <div class="w3-col s2"><button onclick="inicializar()" class="w3-button w3-indigo w3-border w3-border-blue w3-ripple w3-tiny"><i class="fas fa-home fa-lg"></i></button></div>
-          <div class="w3-col s4"><select id="mes" onchange="inicializar()" class="w3-select" style="width:45px;"></select><select id="ano" class="w3-select" onchange="inicializar()" style="width:55px;"></select></div>
-          <div class="w3-col s3"><button onclick="resumo()" class="w3-button w3-indigo w3-border w3-border-blue w3-ripple w3-tiny"><i class="fas fa-eye fa-lg"></i> &nbsp;Res.</button></div>
-          <div class="w3-col s3"><button onclick="adm_categorias()" class="w3-button w3-indigo w3-border w3-border-blue w3-ripple w3-tiny"><i class="fas fa-edit fa-lg"></i> &nbsp;Categ.</button></div>
-        </div>
-    	</div>
-
-      <div id="resumo" style="display:none;font-size:12px;" class="w3-card-4 w3-display-container">
+      <div class="w3-top"> <!-- menu -->
+        <div class="w3-indigo">
+          <div class="w3-row" style="font-size:11px">
+            <div class="w3-col s2"><button onclick="inicializar()" class="w3-button w3-indigo w3-border w3-border-blue w3-ripple w3-tiny"><i class="fas fa-home fa-lg"></i>&nbsp;</button></div>
+            <div class="w3-col s4"><select id="mes" onchange="inicializar()" class="w3-select" style="width:42px;"></select><select id="ano" class="w3-select" onchange="inicializar()" style="width:55px;"></select></div>
+            <div class="w3-col s3"><button onclick="resumo()" class="w3-button w3-indigo w3-border w3-border-blue w3-ripple w3-tiny"><i class="fas fa-eye fa-lg"></i> &nbsp;Res.</button></div>
+            <div class="w3-col s3"><button onclick="adm_categorias()" class="w3-button w3-indigo w3-border w3-border-blue w3-ripple w3-tiny"><i class="fas fa-edit fa-lg"></i> &nbsp;Categ.</button></div>
+          </div>
+      	</div>
+      </div> <!-- menu -->
+      <div style="height:14px;"> </div> <!-- desconto espaço menu -->
+      <div id="resumo" style="display:none;font-size:12px;" class="w3-card-4 w3-display-container w3-animate-zoom">
         <header class="w3-container w3-dark-grey"><h5>Entradas e Saídas do mês</h5>
           <span onclick="this.parentElement.parentElement.style.display='none'"
             class="w3-button w3-dark-grey w3-large w3-display-topright">&times;</span>
@@ -108,7 +108,7 @@
               </div>
             </div>
       </div> <!-- div resumo -->
-      <div id="inicializar">
+      <div id="inicializar" class="w3-animate-left">
       	<button class="w3-button w3-blue w3-block" onclick="categorias()"><i class="fas fa-plus fa-lg"></i>&nbsp; Adicionar movimento</button>
         <span style="font-size:12px;">Filtrar por categoria: </span><select id="categoria" onchange="inicializar()" style='font-size: 12px;'><option value=""></option></select>
         <table id="movimento"  cellpadding="1" cellspacing="0" class=""  style='width:100%;'>
@@ -126,11 +126,11 @@
         <div id="soma" class="w3-text-red w3-border-top" style="font-weight:bold;text-align:right;"></div>
       </div> <!-- div inicializar -->
 
-      <div id="categorias">
+      <div id="categorias" class="w3-animate-zoom">
 
       </div> <!-- div categorias -->
 
-      <div id="adm_categorias" class="w3-card-4">
+      <div id="adm_categorias" class="w3-card-4 w3-animate-left">
         <button class="w3-button w3-blue w3-block" onclick="adicionar_categoria()"><i class="fas fa-plus fa-lg"></i>&nbsp; Adicionar nova categoria</button>
         <table cellpadding="1" cellspacing="0" class=""  style='width:100%;'>
       		<thead style='font-size: 11px;'>
@@ -143,9 +143,9 @@
       		<tbody id="conteudoCat" style="font-size: 12px;">
           </tbody>
       	</table>
-      </div> <!-- div categorias -->
+      </div> <!-- div adm_categorias -->
 
-      <div id="editar_categorias" class="w3-card-4">
+      <div id="editar_categorias" class="w3-card-4 w3-animate-zoom">
         <br>
         <header class="w3-container w3-dark-grey w3-center">
           <h5>Edição de categoria</h5>
@@ -157,7 +157,7 @@
         </footer>
       </div> <!-- div editar_categorias -->
 
-      <div id="adicionar" style="display:none;">
+      <div id="adicionar" class="w3-animate-zoom" style="display:none;">
         <p>
           <form>
            <input type="radio" class="tipo" id="tipo" value="0" checked> Despesa
@@ -175,24 +175,25 @@
         <button class="w3-button w3-blue" onclick="salvar()"><i class="fas fa-save fa-lg"></i>&nbsp; Salvar</button>
       </div> <!-- div adicionar -->
 
-      <div id="editar" class="w3-card" style="display:none;font-size:12px;">
-        <br>
-        <header class="w3-container w3-dark-grey w3-center">
-          <h5>Alteração</h5>
-        </header>
-        <input type="hidden" id="alt_id" value="">
-        <p style="font-size:12px;">Dia: <input type="text" id="alt_dia" style="width:50px;text-align:center;"> </p>
-        <form>
-         <input type="radio" name="alt_tipo" class="w3-radio" value="1"> Despesa
-         <input type="radio" name="alt_tipo" class="w3-radio" value="0"> Receita
-       </form>
-       <p style="font-size:12px;">Categoria: <select id="alt_cat" class="w3-select" style="width:200px;"></select></p>
-       <p style="font-size:12px;">Descrição: <input type="text" id="alt_descricao" style="width:300px;"> </p>
-       <p style="font-size:12px;">Valor: <input type="text" id="alt_valor" autocomplete="off" onkeypress='return nr_virg(event)' style="width:100px;"> </p>
-       <footer class="w3-container w3-dark-grey w3-center" style="font-size:12px;">
-          <button class="w3-button w3-blue" onclick="salva_alteracoes()"><i class="fas fa-check fa-lg"></i> &nbsp; Salvar</button>
-          <button class="w3-button w3-blue" onclick="deletar()"><i class="fas fa-trash-alt fa-lg"></i> &nbsp; Remover</button>
-       </footer>
+      <div id="editar" class="w3-card w3-animate-zoom" style="display:none;font-size:12px;">
+
+          <br>
+          <header class="w3-container w3-dark-grey w3-center">
+            <h5>Alteração</h5>
+          </header>
+          <input type="hidden" id="alt_id" value="">
+          <p style="font-size:12px;">Dia: <input type="text" id="alt_dia" style="width:50px;text-align:center;"> </p>
+          <form>
+           <input type="radio" name="alt_tipo" class="w3-radio" value="0"> Despesa
+           <input type="radio" name="alt_tipo" class="w3-radio" value="1"> Receita
+         </form>
+         <p style="font-size:12px;">Categoria: <select id="alt_cat" class="w3-select" style="width:200px;"></select></p>
+         <p style="font-size:12px;">Descrição: <input type="text" id="alt_descricao" style="width:300px;"> </p>
+         <p style="font-size:12px;">Valor: <input type="text" id="alt_valor" autocomplete="off" onkeypress='return nr_virg(event)' style="width:100px;"> </p>
+         <footer class="w3-container w3-dark-grey w3-center" style="font-size:12px;">
+            <button class="w3-button w3-blue" onclick="salva_alteracoes()"><i class="fas fa-check fa-lg"></i> &nbsp; Salvar</button>
+            <button class="w3-button w3-blue" onclick="deletar()"><i class="fas fa-trash-alt fa-lg"></i> &nbsp; Remover</button>
+         </footer>
       </div> <!-- div editar -->
 
       <div id="footer" class="footer w3-blue-grey w3-center" style="display:none;">
@@ -206,5 +207,4 @@
       app.initialize();
     </script>
 </body>
-
 </html>
