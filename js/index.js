@@ -52,6 +52,7 @@ var app = {
         login();
     }
 };
+
 function checkOnline(server) {
   var xhr = new XMLHttpRequest();
   xhr.open('POST', server + "/cx/funcoes.php", true);
@@ -59,11 +60,11 @@ function checkOnline(server) {
   xhr.onreadystatechange = function () {
       if(xhr.status === 200) {
         //document.getElementById('servidor').innerHTML = server;
-        //localStorage.setItem("server", "http://192.168.1.51");
-        localStorage.setItem("server", "http://localhost");
+        //localStorage.setItem("server", "http://192.168.1.5");
+        localStorage.setItem("server", "http://192.168.1.5");
         login();
       }else{
-        localStorage.setItem("server", "http://localhost");
+        localStorage.setItem("server", "http://ebsleivas.sytes.net");
         login();
       }
     };
@@ -117,31 +118,6 @@ var login = function(){
   now = new Date;
   document.getElementById('mes').value= now.getMonth();
   document.getElementById('ano').value= now.getFullYear();
-
-  xhr = new XMLHttpRequest();
-  xhr.open('POST', "http://ebsleivas.sytes.net/cx/funcoes.php");
-  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  xhr.onload = function() {
-    if (xhr.status === 200) {
-      var arr =  JSON.parse(xhr.responseText);
-      for(var i = 0; i < arr.length; i++) {
-        var option = document.createElement("option");
-        option.text = arr[i].nome;
-        option.value = arr[i].id;
-        document.getElementById('categoria').appendChild(option);
-
-        var option2 = document.createElement("option");
-        option2.text = arr[i].nome;
-        option2.value = arr[i].id;
-        document.getElementById('alt_cat').appendChild(option2);
-       }
-      //inicializar();
-    }
-    else if (xhr.status !== 200) {
-      msg('Request failed.  Returned status of ' + xhr.status);
-    }
-  }
-  xhr.send(encodeURI('acao=categorias'));
 };
 
 var logar = function(){
@@ -153,12 +129,14 @@ var logar = function(){
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
   xhr.onload = function() {
    if (xhr.status === 200) {
-     if(xhr.responseText != 'erro'){
+     if(xhr.responseText != 'Erro'){
        var json = JSON.parse(xhr.responseText);
-       localStorage.setItem("user", json[0].usuario);
+	     localStorage.setItem("jwt", json.jwt);
+       localStorage.setItem("user", json.usuario);
        localStorage.setItem("logado", '1');
-       //esconde('inicializar');
-       inicializar();
+       logado(json.jwt);
+       //window.setTimeout(inicializar(), 15000);
+       //inicializar();
     }else{
       msg('Senha ou usuário inválido!');
     }
@@ -167,6 +145,32 @@ var logar = function(){
     }
   }
   xhr.send(encodeURI('acao=logar&hnome=' + nome + '&hsenha=' + senha));
+};
+
+var logado = function(jwt){
+  xhr = new XMLHttpRequest();
+  xhr.open('POST', "http://ebsleivas.sytes.net/cx/funcoes.php");
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      var arr =  JSON.parse(xhr.responseText);
+      for(var i = 0; i < arr.length; i++) {
+        var option = document.createElement("option");
+        option.text = arr[i].nome;
+        option.value = arr[i].id;
+        document.getElementById('categoria').appendChild(option);
+        var option2 = document.createElement("option");
+        option2.text = arr[i].nome;
+        option2.value = arr[i].id;
+        document.getElementById('alt_cat').appendChild(option2);
+       }
+      inicializar();
+    }
+    else if (xhr.status !== 200) {
+      msg('Request failed.  Returned status of ' + xhr.status);
+    }
+  }
+  xhr.send(encodeURI('acao=categorias&jwt=' + jwt));
 };
 
 var resumo = function(){
@@ -198,7 +202,7 @@ var resumo = function(){
       alert('Request failed.  Returned status of ' + xhr.status);
     }
   }
-  xhr.send(encodeURI('acao=resumo&ano=' + ano + '&mes=' + mes));
+  xhr.send(encodeURI('acao=resumo&ano=' + ano + '&mes=' + mes + '&jwt=' + localStorage.getItem('jwt')));
 
 }
 
@@ -208,14 +212,6 @@ var inicializar = function(){
   var categoria = document.getElementById('categoria').value;
   esconde("inicializar");
   document.getElementById('footer').setAttribute('style', 'display:none;');
-  /*document.getElementById('conteudo').setAttribute('style', 'display:block;');
-  document.getElementById('inicializar').setAttribute('style', 'display:block;');
-  document.getElementById('login').setAttribute('style', 'display:none;');
-  document.getElementById('footer').setAttribute('style', 'display:none;');
-  document.getElementById('categorias').setAttribute('style', 'display:none;');
-  document.getElementById('adicionar').setAttribute('style', 'display:none;');
-  document.getElementById('resumo').setAttribute('style', 'display:none;');
-  document.getElementById('editar').setAttribute('style', 'display:none;');*/
   xhr = new XMLHttpRequest();
   xhr.open('POST', "http://ebsleivas.sytes.net/cx/funcoes.php");
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -225,10 +221,11 @@ var inicializar = function(){
     var total = 0;
     var str = "";
       for(var i = 0; i < arr.length; i++) {
+      var cor = arr[i].tipo == '0' ? 'Black' : 'Green';
       str += "<tr style='height:32px;'><td style='text-align:center;'><i class='fas fa-edit fa-2x' style='color:DodgerBlue' onclick='editar(" + arr[i].id +")'></i></td>";
       str += "<td style='text-align:center;'>" + arr[i].dia + "</td>";
       str += "<td>" + arr[i].nome + " - " + arr[i].descricao  +"</td>";
-      str += "<td style='text-align:right;'>" + arr[i].sinal + " " + numero2moeda(arr[i].valor) + "</td></tr>";
+      str += "<td style='text-align:right;'><span style='color:" + cor + ";'>" + arr[i].sinal + " " + numero2moeda(arr[i].valor) + "</span></td></tr>";
         if(arr[i].tipo == '0'){
           total = total +  parseFloat(arr[i].valor);
         }else{
@@ -242,16 +239,13 @@ var inicializar = function(){
       msg('Request failed.  Returned status of ' + xhr.status);
     }
   }
-  xhr.send(encodeURI('acao=inicializar&mes=' + mes + '&ano=' + ano + '&categoria=' + categoria));
+  xhr.send(encodeURI('acao=inicializar&mes=' + mes + '&ano=' + ano + '&categoria=' + categoria + '&jwt=' + localStorage.getItem('jwt')));
 };
 
 var categorias = function(){
   localStorage.setItem("id_cat", "");
   esconde("categorias");
   document.getElementById('footer').setAttribute('style', 'display:none;');
-  //document.getElementById('categorias').setAttribute('style', 'display:block;');
-  //document.getElementById('inicializar').setAttribute('style', 'display:none;');
-  //document.getElementById('adicionar').setAttribute('style', 'display:none;');
   xhr = new XMLHttpRequest();
   xhr.open('POST', "http://ebsleivas.sytes.net/cx/funcoes.php");
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -269,7 +263,7 @@ var categorias = function(){
       msg('Request failed.  Returned status of ' + xhr.status);
     }
   }
-  xhr.send(encodeURI('acao=categorias'));
+  xhr.send(encodeURI('acao=categorias&jwt=' + localStorage.getItem('jwt')));
 };
 
 var selecionarCat = function(cat){
@@ -313,7 +307,6 @@ var voltar = function(d,div){
 
 var salvar = function(){
   var opt = document.forms[0];
-  //var x = document.getElementById("myForm").elements.length;
   var tipo = "";
   var i;
   for (i = 0; i < opt.length; i++) {
@@ -342,7 +335,7 @@ var salvar = function(){
       msg('Request failed.  Returned status of ' + xhr.status);
     }
   }
-  xhr.send(encodeURI('acao=salvar&dia=' + dia + '&descricao=' + descricao + '&categoria=' + categoria + '&valor=' + valor + '&tipo=' + tipo));
+  xhr.send(encodeURI('acao=salvar&dia=' + dia + '&descricao=' + descricao + '&categoria=' + categoria + '&valor=' + valor + '&tipo=' + tipo + '&jwt=' + localStorage.getItem('jwt')));
 };
 
 var deletar = function(){
@@ -360,7 +353,6 @@ var deletar = function(){
 };
 
 var deletou = function(id){
-  //var id = document.getElementById('alt_id').value;
   xhr = new XMLHttpRequest();
   xhr.open('POST', "http://ebsleivas.sytes.net/cx/funcoes.php");
   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -374,12 +366,10 @@ var deletou = function(id){
       msg('Request failed.  Returned status of ' + xhr.status);
     }
   }
-  xhr.send(encodeURI('acao=deletar&id=' + id));
+  xhr.send(encodeURI('acao=deletar&id=' + id  + '&jwt=' + localStorage.getItem('jwt')));
 };
 
 var editar = function(id){
-  //document.getElementById("inicializar").style.display = 'none';
-  //document.getElementById("editar").style.display = 'block';
   esconde("editar");
   voltar('block','inicializar');
   var tipo = document.forms[1];
@@ -407,7 +397,7 @@ var editar = function(id){
       msg('Request failed.  Returned status of ' + xhr.status);
     }
   }
-  xhr.send(encodeURI('acao=editar&id=' + id));
+  xhr.send(encodeURI('acao=editar&id=' + id  + '&jwt=' + localStorage.getItem('jwt')));
 };
 
 var salva_alteracoes = function(){
@@ -441,11 +431,10 @@ var salva_alteracoes = function(){
       msg('Request failed.  Returned status of ' + xhr.status);
     }
   }
-  xhr.send(encodeURI('acao=salvar&dia=' + dia + '&descricao=' + descricao + '&categoria=' + categoria + '&valor=' + valor + '&tipo=' + tipo + '&id=' + id));
+  xhr.send(encodeURI('acao=salvar&dia=' + dia + '&descricao=' + descricao + '&categoria=' + categoria + '&valor=' + valor + '&tipo=' + tipo + '&id=' + id  + '&jwt=' + localStorage.getItem('jwt')));
 };
 
 var adm_categorias = function(){
-  //document.getElementById('adm_categorias').style.display = 'block';
   document.getElementById('footer').setAttribute('style', 'display:none;');
   esconde("adm_categorias");
   xhr = new XMLHttpRequest();
@@ -466,7 +455,7 @@ var adm_categorias = function(){
       msg('Request failed.  Returned status of ' + xhr.status);
     }
   }
-  xhr.send(encodeURI('acao=categorias'));
+  xhr.send(encodeURI('acao=categorias&jwt=' + localStorage.getItem('jwt')));
 };
 
 var esconde = function(div){
@@ -509,7 +498,7 @@ var deletouCat = function(id){
       msg('Request failed.  Returned status of ' + xhr.status);
     }
   }
-  xhr.send(encodeURI('acao=deletarCat&id=' + id));
+  xhr.send(encodeURI('acao=deletarCat&id=' + id + '&jwt=' + localStorage.getItem('jwt')));
 };
 
 var editarCat = function(id, cat){
@@ -534,7 +523,7 @@ var salvar_Cat = function(){
       msg('Request failed.  Returned status of ' + xhr.status);
     }
   }
-  xhr.send(encodeURI('acao=salvarCat&id=' + id + '&categoria=' + categoria));
+  xhr.send(encodeURI('acao=salvarCat&id=' + id + '&categoria=' + categoria + '&jwt=' + localStorage.getItem('jwt')));
 };
 
 var adicionar_categoria = function(){
