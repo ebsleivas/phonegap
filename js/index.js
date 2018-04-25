@@ -340,7 +340,7 @@ var salvar = function(){
 
 var deletar = function(){
   var id = document.getElementById('alt_id').value;
-  var message = "Confirma deletar " + item;
+  var message = "Confirma deletar?";
   var title = "CONFIRMAR";
   var buttonLabels = "SIM,NAO";
   navigator.notification.confirm(message, confirmCallback, title, buttonLabels);
