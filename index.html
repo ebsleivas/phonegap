@@ -1,4 +1,4 @@
-n<!DOCTYPE html>
+<!DOCTYPE html>
 <!--
     Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
 
@@ -160,8 +160,8 @@ n<!DOCTYPE html>
       <div id="adicionar" class="w3-animate-zoom" style="display:none;">
         <p>
           <form>
-           <input type="radio" class="tipo" id="tipo" value="0" checked> Despesa
-           <input type="radio" class="tipo" value="1"> Receita
+           <input type="radio" class="tipo w3-radio" name="tipo" value="0" checked> Despesa
+           <input type="radio" class="tipo w3-radio" name="tipo" value="1"> Receita
          </form>
         </p>
         <p>
@@ -170,7 +170,7 @@ n<!DOCTYPE html>
         Descrição:<br>
         <input type="text" id="descricao" style="width:300px;">
         <p>
-          valor: <input type="text" id="valor" autocomplete="off" onkeypress='return nr_virg(event)' style="width:60px;">
+          valor: <input type="text" id="valor" autocomplete="off" onkeypress='return nr_virg(event)' style="width:150px;text-align:center;">
         </p>
         <button class="w3-button w3-blue" onclick="salvar()"><i class="fas fa-save fa-lg"></i>&nbsp; Salvar</button>
       </div> <!-- div adicionar -->
@@ -189,7 +189,7 @@ n<!DOCTYPE html>
          </form>
          <p style="font-size:12px;">Categoria: <select id="alt_cat" class="w3-select" style="width:200px;"></select></p>
          <p style="font-size:12px;">Descrição: <input type="text" id="alt_descricao" style="width:300px;"> </p>
-         <p style="font-size:12px;">Valor: <input type="text" id="alt_valor" autocomplete="off" onkeypress='return nr_virg(event)' style="width:100px;"> </p>
+         <p style="font-size:12px;">Valor: <input type="text" id="alt_valor" autocomplete="off" onkeypress='return nr_virg(event)' style="width:150px;text-align:center;"> </p>
          <footer class="w3-container w3-dark-grey w3-center" style="font-size:12px;">
             <button class="w3-button w3-blue" onclick="salva_alteracoes()"><i class="fas fa-check fa-lg"></i> &nbsp; Salvar</button>
             <button class="w3-button w3-blue" onclick="deletar()"><i class="fas fa-trash-alt fa-lg"></i> &nbsp; Remover</button>
