@@ -227,9 +227,9 @@ var inicializar = function(){
       str += "<td>" + arr[i].nome + " - " + arr[i].descricao  +"</td>";
       str += "<td style='text-align:right;'><span style='color:" + cor + ";'>" + arr[i].sinal + " " + numero2moeda(arr[i].valor) + "</span></td></tr>";
         if(arr[i].tipo == '0'){
-          total = total +  parseFloat(arr[i].valor);
+          total = total -  parseFloat(arr[i].valor);
         }else{
-          total = total - parseFloat(arr[i].valor);
+          total = total + parseFloat(arr[i].valor);
         }
        }
     document.getElementById('conteudoMov').innerHTML = str;
@@ -328,6 +328,7 @@ var salvar = function(){
   xhr.onload = function() {
     if (xhr.status === 200) {
        if(xhr.responseText == 'Ok') {
+         opt[0].checked;
          inicializar();
        }
     }
